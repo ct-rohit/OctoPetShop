@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-    OCTOPUSSERVER_SPACE: Default
+    OCTOPUS_SPACE: Default
   
 jobs:
  
@@ -47,4 +47,4 @@ jobs:
       - name: Clean
         working-directory: helm/charts/
         run: |- 
-             rm -f common-resources.${{ env.PACKAGE_VERSION }}.tgz
+             rm -f octo-pet-shop.${{ env.PACKAGE_VERSION }}.tgz
