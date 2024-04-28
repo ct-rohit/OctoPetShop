@@ -1,0 +1,50 @@
+name: octopus-deploy
+ 
+on: 
+  workflow_dispatch:
+
+env:
+   OCTOPUS_SPACE: Default
+  
+jobs:
+ 
+  build:
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set PACKAGE_VERSION
+        run: echo "PACKAGE_VERSION=$(date +'%Y.%m.%d')-${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+        
+      - name: Print PACKAGE_VERSION
+        run: echo "Package Version is ${{ env.PACKAGE_VERSION }}"
+
+      - name: Package App
+        run: |- 
+             helm package octo-pet-shop --version=${{ env.PACKAGE_VERSION }} --app-version=${{ env.PACKAGE_VERSION }}
+             mv octo-pet-shop-${{ env.PACKAGE_VERSION }}.tgz octo-pet-shop.${{ env.PACKAGE_VERSION }}.tgz
+
+      - name: Push octo-pet-shop to Octopus
+        uses: OctopusDeploy/push-package-action@v3
+        with:
+          api_key: ${{ secrets.OCTOPUS_API_KEY }}
+          server: ${{ secrets.OCTOPUS_SERVER_URL }}
+          overwrite_mode: OverwriteExisting
+          packages: "octo-pet-shop.${{ env.PACKAGE_VERSION }}.tgz"
+
+      - name: Deploy the release in Octopus Deploy
+        uses: OctopusDeploy/deploy-release-action@v3
+        with:
+            api_key: ${{ secrets.OCTOPUS_API_KEY }}
+            server: ${{ secrets.OCTOPUS_SERVER_URL }}
+            project: Octo-Pet-Shop
+            release_number: "${{ env.PACKAGE_VERSION }}"
+            environments: |
+              development 
+  
+      - name: Clean
+        working-directory: helm/charts/
+        run: |- 
+             rm -f common-resources.${{ env.PACKAGE_VERSION }}.tgz
