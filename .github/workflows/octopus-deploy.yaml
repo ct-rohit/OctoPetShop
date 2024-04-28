@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-   OCTOPUS_SPACE: Default
+    OCTOPUSSERVER_SPACE: Default
   
 jobs:
  
@@ -29,16 +29,16 @@ jobs:
       - name: Push octo-pet-shop to Octopus
         uses: OctopusDeploy/push-package-action@v3
         with:
-          api_key: ${{ secrets.OCTOPUS_API_KEY }}
-          server: ${{ secrets.OCTOPUS_SERVER_URL }}
+          api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
+          server: ${{ secrets.OCTOPUSSERVERURL }}
           overwrite_mode: OverwriteExisting
           packages: "octo-pet-shop.${{ env.PACKAGE_VERSION }}.tgz"
 
       - name: Deploy the release in Octopus Deploy
         uses: OctopusDeploy/deploy-release-action@v3
         with:
-            api_key: ${{ secrets.OCTOPUS_API_KEY }}
-            server: ${{ secrets.OCTOPUS_SERVER_URL }}
+            api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
+            server: ${{ secrets.OCTOPUSSERVERURL }}
             project: Octo-Pet-Shop
             release_number: "${{ env.PACKAGE_VERSION }}"
             environments: |
