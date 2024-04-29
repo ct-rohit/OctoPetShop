@@ -20,8 +20,8 @@ jobs:
 
       - name: Package App
         run: |- 
-             helm package Octo-Pet-Shop --version=${{ env.PACKAGE_VERSION }} --app-version=${{ env.PACKAGE_VERSION }}
-             mv Octo-Pet-Shop-${{ env.PACKAGE_VERSION }}.tgz Octo-Pet-Shop.${{ env.PACKAGE_VERSION }}.tgz
+             helm package octo-pet-shop --version=${{ env.PACKAGE_VERSION }} --app-version=${{ env.PACKAGE_VERSION }}
+             mv octo-pet-shop-${{ env.PACKAGE_VERSION }}.tgz octo-pet-shop.${{ env.PACKAGE_VERSION }}.tgz
 
       - name: Push octo-pet-shop to Octopus ##
         uses: OctopusDeploy/push-package-action@v3
@@ -30,7 +30,7 @@ jobs:
           server: ${{ secrets.OCTOPUSSERVERURL }}
           space: Default
           overwrite_mode: OverwriteExisting
-          packages: "Octo-Pet-Shop.${{ env.PACKAGE_VERSION }}.tgz"
+          packages: "octo-pet-shop.${{ env.PACKAGE_VERSION }}.tgz"
       
       - name: Create release and deploy to Development
         uses: OctopusDeploy/create-release-action@v3
@@ -40,7 +40,7 @@ jobs:
             project: Octo-Pet-Shop
             space: Default
             release_number: "${{ env.PACKAGE_VERSION }}"
-            packages: "Octo-Pet-Shop.${{ env.PACKAGE_VERSION }}.tgz"
+            packages: "octo-pet-shop.${{ env.PACKAGE_VERSION }}.tgz"
 
       - name: Deploy the release in Octopus Deploy
         uses: OctopusDeploy/deploy-release-action@v3
@@ -55,4 +55,4 @@ jobs:
   
       - name: Clean
         run: |- 
-             rm -f Octo-Pet-Shop.${{ env.PACKAGE_VERSION }}.tgz
+             rm -f octo-pet-shop.${{ env.PACKAGE_VERSION }}.tgz
