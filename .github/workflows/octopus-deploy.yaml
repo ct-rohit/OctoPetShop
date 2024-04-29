@@ -40,7 +40,7 @@ jobs:
             project: Octo-Pet-Shop
             space: Default
             release_number: "${{ env.PACKAGE_VERSION }}"
-            packages: "octo-pet-shop:${{ env.PACKAGE_VERSION }}.tgz"
+            packages: "octo-pet-shop:${{ env.PACKAGE_VERSION }}"
 
       - name: Deploy the release in Octopus Deploy
         uses: OctopusDeploy/deploy-release-action@v3
@@ -48,7 +48,6 @@ jobs:
             api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
             server: ${{ secrets.OCTOPUSSERVERURL }}
             project: Octo-Pet-Shop
-            space: Default
             release_number: "${{ env.PACKAGE_VERSION }}"
             environments: |
               development 
