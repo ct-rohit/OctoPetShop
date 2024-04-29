@@ -32,9 +32,15 @@ jobs:
           overwrite_mode: OverwriteExisting
           packages: "Octo-Pet-Shop.${{ env.PACKAGE_VERSION }}.tgz"
       
-      - name: Package App
-        run: |- 
-               sleep 10
+      - name: Create release and deploy to Development
+        uses: OctopusDeploy/create-release-action@v3
+        with:
+            api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
+            server: ${{ secrets.OCTOPUSSERVERURL }}
+            project: Octo-Pet-Shop
+            space: Default
+            release_number: "${{ env.PACKAGE_VERSION }}"
+            packages: "Octo-Pet-Shop.${{ env.PACKAGE_VERSION }}.tgz"
 
       - name: Deploy the release in Octopus Deploy
         uses: OctopusDeploy/deploy-release-action@v3
