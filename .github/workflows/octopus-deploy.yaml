@@ -2,6 +2,9 @@ name: octopus-deploy
  
 on: 
   workflow_dispatch:
+
+env:
+    OCTOPUS_SPACE: K8S-Deployment
   
 jobs:
  
@@ -28,7 +31,6 @@ jobs:
         with:
           api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
           server: ${{ secrets.OCTOPUSSERVERURL }}
-          space: Default
           overwrite_mode: OverwriteExisting
           packages: "octo-pet-shop.${{ env.PACKAGE_VERSION }}.tgz"
       
@@ -38,7 +40,6 @@ jobs:
             api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
             server: ${{ secrets.OCTOPUSSERVERURL }}
             project: Octo-Pet-Shop
-            space: Default
             release_number: "${{ env.PACKAGE_VERSION }}"
             packages: "octo-pet-shop:${{ env.PACKAGE_VERSION }}"
 
@@ -48,7 +49,6 @@ jobs:
             api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
             server: ${{ secrets.OCTOPUSSERVERURL }}
             project: Octo-Pet-Shop
-            space: Default
             release_number: "${{ env.PACKAGE_VERSION }}"
             environments: |
               development 
