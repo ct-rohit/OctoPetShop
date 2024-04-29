@@ -28,6 +28,7 @@ jobs:
         with:
           api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
           server: ${{ secrets.OCTOPUSSERVERURL }}
+          space: Default
           overwrite_mode: OverwriteExisting
           packages: "Octo-Pet-Shop.${{ env.PACKAGE_VERSION }}.tgz"
 
@@ -37,6 +38,7 @@ jobs:
             api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
             server: ${{ secrets.OCTOPUSSERVERURL }}
             project: Octo-Pet-Shop
+            space: Default
             release_number: "${{ env.PACKAGE_VERSION }}"
             environments: |
               development 
