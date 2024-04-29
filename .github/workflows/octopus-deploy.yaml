@@ -23,8 +23,8 @@ jobs:
 
       - name: Package App
         run: |- 
-             helm package octo-pet-shop --version=${{ env.PACKAGE_VERSION }} --app-version=${{ env.PACKAGE_VERSION }}
-             mv octo-pet-shop-${{ env.PACKAGE_VERSION }}.tgz octo-pet-shop.${{ env.PACKAGE_VERSION }}.tgz
+             helm package Octo-Pet-Shop --version=${{ env.PACKAGE_VERSION }} --app-version=${{ env.PACKAGE_VERSION }}
+             mv Octo-Pet-Shop-${{ env.PACKAGE_VERSION }}.tgz Octo-Pet-Shop.${{ env.PACKAGE_VERSION }}.tgz
 
       - name: Push octo-pet-shop to Octopus
         uses: OctopusDeploy/push-package-action@v3
