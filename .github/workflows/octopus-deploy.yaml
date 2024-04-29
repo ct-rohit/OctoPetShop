@@ -31,6 +31,10 @@ jobs:
           space: Default
           overwrite_mode: OverwriteExisting
           packages: "Octo-Pet-Shop.${{ env.PACKAGE_VERSION }}.tgz"
+      
+      - name: Package App
+        run: |- 
+               sleep 10
 
       - name: Deploy the release in Octopus Deploy
         uses: OctopusDeploy/deploy-release-action@v3
