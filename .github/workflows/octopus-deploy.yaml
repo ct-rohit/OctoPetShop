@@ -32,7 +32,7 @@ jobs:
           api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
           server: ${{ secrets.OCTOPUSSERVERURL }}
           overwrite_mode: OverwriteExisting
-          packages: "octo-pet-shop.${{ env.PACKAGE_VERSION }}.tgz"
+          packages: "Octo-Pet-Shop.${{ env.PACKAGE_VERSION }}.tgz"
 
       - name: Deploy the release in Octopus Deploy
         uses: OctopusDeploy/deploy-release-action@v3
@@ -45,6 +45,5 @@ jobs:
               development 
   
       - name: Clean
-        working-directory: helm/charts/
         run: |- 
-             rm -f octo-pet-shop.${{ env.PACKAGE_VERSION }}.tgz
+             rm -f Octo-Pet-Shop.${{ env.PACKAGE_VERSION }}.tgz
