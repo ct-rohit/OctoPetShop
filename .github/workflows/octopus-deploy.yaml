@@ -41,7 +41,7 @@ jobs:
         with:
             api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
             server: ${{ secrets.OCTOPUSSERVERURL }}
-            project: octo-pet-shop
+            project: Octo-Pet-Shop
             space: Default
             release_number: "${{ env.PACKAGE_VERSION }}"
             environments: |
