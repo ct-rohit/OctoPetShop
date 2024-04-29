@@ -26,7 +26,7 @@ jobs:
              helm package Octo-Pet-Shop --version=${{ env.PACKAGE_VERSION }} --app-version=${{ env.PACKAGE_VERSION }}
              mv Octo-Pet-Shop-${{ env.PACKAGE_VERSION }}.tgz Octo-Pet-Shop.${{ env.PACKAGE_VERSION }}.tgz
 
-      - name: Push octo-pet-shop to Octopus
+      - name: Push octo-pet-shop to Octopus ##
         uses: OctopusDeploy/push-package-action@v3
         with:
           api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
