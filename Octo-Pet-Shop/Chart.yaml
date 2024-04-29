@@ -1,5 +1,5 @@
 apiVersion: v2
-name: octo-pet-shop
+name: Octo-Pet-Shop
 description: A Helm chart for Kubernetes
 
 # A chart can be either an 'application' or a 'library' chart.
